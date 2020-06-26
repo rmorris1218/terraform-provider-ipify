@@ -2,7 +2,20 @@
 
 Terraform provider for [Ipify](https://ipify.org) to use your public IP in Terraform configurations.
 
+![Release](https://github.com/rmorris1218/terraform-provider-ipify/workflows/Release/badge.svg)
+
 ## Install
+
+### Binary
+
+Download the latest binary for your platform from the [Releases](https://github.com/rmorris1218/terraform-provider-ipify/releases) page
+
+```bash
+unzip terraform-provider-ipify_v0.0.1_darwin_amd64.zip && rm terraform-provider-ipify_v0.0.1_darwin_amd64.zip
+mv ./terraform-provider-ipify ~/.terraform.d/plugins/
+```
+
+### From Source
 
 ```bash
 git clone git@github.com:rmorris1218/terraform-provider-ipify

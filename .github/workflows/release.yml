@@ -18,11 +18,11 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
           GOOS=darwin GOARCH=amd64 go build -o terraform-provider-ipify
-          zip --junk-paths terraform-provider-ipify_${{ github.ref }}_darwin_amd64.zip terraform-provider-ipify
+          zip --junk-paths terraform-provider-ipify_darwin_amd64.zip terraform-provider-ipify
           GOOS=linux GOARCH=amd64 go build -o terraform-provider-ipify
-          zip --junk-paths terraform-provider-ipify_${{ github.ref }}_linux_amd64.zip terraform-provider-ipify
-          GOOS=windows GOARCH=x86_64 go build -o terraform-provider-ipify
-          zip --junk-paths terraform-provider-ipify_${{ github.ref }}_windows_x86_64.zip terraform-provider-ipify
+          zip --junk-paths terraform-provider-ipify_linux_amd64.zip terraform-provider-ipify
+          GOOS=windows GOARCH=amd64 go build -o terraform-provider-ipify
+          zip --junk-paths terraform-provider-ipify_windows_amd64.zip terraform-provider-ipify
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -33,33 +33,33 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Release Asset Mac
+        id: upload-release-asset-mac
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./terraform-provider-ipify_${{ github.ref }}_darwin_amd64.zip
-          asset_name: terraform-provider-ipify_${{ github.ref }}_darwin_amd64.zip
+          asset_path: ./terraform-provider-ipify_darwin_amd64.zip
+          asset_name: terraform-provider-ipify_darwin_amd64.zip
           asset_content_type: application/zip
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Release Asset Linux
+        id: upload-release-asset-linux
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./terraform-provider-ipify_${{ github.ref }}_linux_amd64.zip
-          asset_name: terraform-provider-ipify_${{ github.ref }}_linux_amd64.zip
+          asset_path: ./terraform-provider-ipify_linux_amd64.zip
+          asset_name: terraform-provider-ipify_linux_amd64.zip
           asset_content_type: application/zip
-      - name: Upload Release Asset
-        id: upload-release-asset 
+      - name: Upload Release Asset Windows
+        id: upload-release-asset-windows
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./terraform-provider-ipify_${{ github.ref }}_windows_x86_64.zip
-          asset_name: terraform-provider-ipify_${{ github.ref }}_windows_x86_64.zip
+          asset_path: ./terraform-provider-ipify_windows_amd64.zip
+          asset_name: terraform-provider-ipify_windows_amd64.zip
           asset_content_type: application/zip

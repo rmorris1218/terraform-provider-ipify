@@ -2,10 +2,24 @@
 
 Terraform provider for [Ipify](https://ipify.org) to use your public IP in Terraform configurations.
 
+![Release](https://github.com/rmorris1218/terraform-provider-ipify/workflows/Release/badge.svg)
+
 ## Install
+
+### Binary
+
+Download the latest binary for your platform from the [Releases](https://github.com/rmorris1218/terraform-provider-ipify/releases) page
+
+```bash
+unzip terraform-provider-ipify_v0.0.1_darwin_amd64.zip && rm terraform-provider-ipify_v0.0.1_darwin_amd64.zip
+mv ./terraform-provider-ipify ~/.terraform.d/plugins/
+```
+
+### From Source
 
 ```bash
 git clone git@github.com:rmorris1218/terraform-provider-ipify
+cd terraform-provider-ipify
 mkdir -p ~/.terraform.d/plugins
 go build -o ~/.terraform.d/plugins/terraform-provider-ipify
 ```
@@ -26,7 +40,7 @@ output "current_ip" {
     value = data.ipify_current_ip.runner_ip.address
 }
 
-# user public IP CIDR notation for an AWS Security Group ingress rule
+# use public IP CIDR notation for an AWS Security Group ingress rule
 resource "aws_security_group" "jumphost" {
   # ...
 

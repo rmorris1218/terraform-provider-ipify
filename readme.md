@@ -48,7 +48,7 @@ None.
 ## Outputs
 
 
-| field | type | description | 
-| --- | --- | 
-| address | string | public IP address from where terraform is running | 
-| address_cidr | string | the address field appended with single host CIDR notation | 
+| field | type | description |
+| ----- | ---- | ----------- |
+| address | string | public IP address from where terraform is running |
+| address_cidr | string | the address field appended with single host CIDR notation |
